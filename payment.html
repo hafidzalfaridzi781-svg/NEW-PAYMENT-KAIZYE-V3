@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ KAIZYE OFFICIAL PAYMENT</title>
+    <style>
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00ff88;
+            --accent-glow: rgba(0, 255, 136, 0.3);
+            --danger: #ff3366;
+            --warning: #ffaa00;
+            --info: #00a8ff;
+            --text: #f0f0f0;
+            --text-muted: #888;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background: var(--primary);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 51, 102, 0.03) 0%, transparent 20%),
+                linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(26,26,26,0.9) 100%);
+            overflow-x: hidden;
+        }
+        
+        .matrix-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--accent), #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-shadow: 0 0 50px var(--accent-glow);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(0, 255, 136, 0.2);
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+        
+        .options-grid {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .option-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .option-btn:hover::before {
+            left: 100%;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .option-btn.active {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+        
+        .option-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .option-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        
+        .payment-section {
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.1);
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .payment-title {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .method-card {
+            background: rgba(26, 26, 26, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .method-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .method-card.active {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .method-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .method-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .method-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .dana-info {
+            background: rgba(0, 85, 255, 0.1);
+            border: 2px solid #0080ff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .dana-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0080ff;
+            margin: 15px 0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 128, 255, 0.5);
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            padding: 22px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent), #00ccaa);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.5);
+            background: linear-gradient(45deg, #00ccaa, var(--accent));
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .status-panel {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .status-title {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #statusLog {
+            min-height: 100px;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-y: auto;
+            max-height: 200px;
+        }
+        
+        .log-entry {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .log-time {
+            color: var(--accent);
+        }
+        
+        .log-message {
+            color: var(--text);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+            50% { box-shadow: 0 0 40px var(--accent-glow); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .glow {
+            animation: glow 3s infinite;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--accent), #00ccff);
+            border-radius: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Matrix Background Effect -->
+    <canvas class="matrix-effect" id="matrixCanvas"></canvas>
+    
+    <div class="container">
+        <header>
+            <h1>⚡ NEXUS PAYMENT</h1>
+            <div class="tagline">ELITE DIGITAL SERVICES GATEWAY</div>
+            <p style="color: var(--text-muted); margin-top: 10px;">Premium Service • Instant Delivery • Secure Payment</p>
+        </header>
+        
+        <div class="main-grid">
+            <!-- PANEL Service Card -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-title">PANEL</div>
+                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">High-speed data packages with instant activation</p>
+                
+                <div class="options-grid" id="panelOptions">
+                    <div class="option-btn" data-service="panel" data-option="5GB" data-price="2000">
+                        <div class="option-name">5GB</div>
+                        <div class="option-price">Rp 2.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="6GB" data-price="3000">
+                        <div class="option-name">6GB</div>
+                        <div class="option-price">Rp 3.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="7GB" data-price="4000">
+                        <div class="option-name">7GB</div>
+                        <div class="option-price">Rp 4.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="8GB" data-price="5000">
+                        <div class="option-name">8GB</div>
+                        <div class="option-price">Rp 5.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="9GB" data-price="6000">
+                        <div class="option-name">9GB</div>
+                        <div class="option-price">Rp 6.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="10GB" data-price="7000">
+                        <div class="option-name">10GB</div>
+                        <div class="option-price">Rp 7.000</div>
+                    </div>
+                    <div class="option-btn" data-service="panel" data-option="UNLIMITED" data-price="8000">
+                        <div class="option-name">UNLIMITED</div>
+                        <div class="option-price">Rp 8.000</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JASA BAND Service Card -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-title">JASA BAND</div>
+                    <div class="service-icon"><i class="fas fa-ban"></i></div>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Professional banding services for digital platforms</p>
+                
+                <div class="options-grid" id="bandOptions">
+                    <div class="option-btn" data-service="band" data-option="SPAM" data-price="5000">
+                        <div class="option-name">SPAM</div>
+                        <div class="option-price">Rp 5.000</div>
+                    </div>
+                    <div class="option-btn" data-service="band" data-option="PERMANEN TINJAU" data-price="10000">
+                        <div class="option-name">PERMANEN TINJAU</div>
+                        <div class="option-price">Rp 10.000</div>
+                    </div>
+                    <div class="option-btn" data-service="band" data-option="PERMANEN HARD" data-price="15000">
+                        <div class="option-name">PERMANEN HARD</div>
+                        <div class="option-price">Rp 15.000</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JASA BUG WA Service Card -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-title">JASA BUG WA</div>
+                    <div class="service-icon"><i class="fas fa-bug"></i></div>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">WhatsApp vulnerability testing services</p>
+                
+                <div class="options-grid" id="bugOptions">
+                    <div class="option-btn" data-service="bug" data-option="DELAY HARD" data-price="7000">
+                        <div class="option-name">DELAY HARD</div>
+                        <div class="option-price">Rp 7.000</div>
+                    </div>
+                    <div class="option-btn" data-service="bug" data-option="CRASH UI" data-price="8000">
+                        <div class="option-name">CRASH UI</div>
+                        <div class="option-price">Rp 8.000</div>
+                    </div>
+                    <div class="option-btn" data-service="bug" data-option="CRASH BLANK UI" data-price="9000">
+                        <div class="option-name">CRASH BLANK UI</div>
+                        <div class="option-price">Rp 9.000</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JASA UNBAND WA Service Card -->
+            <div class="service-card">
+                <div class="service-header">
+                    <div class="service-title">JASA UNBAND WA</div>
+                    <div class="service-icon"><i class="fas fa-unlock-alt"></i></div>
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Professional WhatsApp unbanning services</p>
+                
+                <div class="options-grid" id="unbandOptions">
+                    <div class="option-btn" data-service="unband" data-option="SPAM" data-price="10000">
+                        <div class="option-name">SPAM</div>
+                        <div class="option-price">Rp 10.000</div>
+                    </div>
+                    <div class="option-btn" data-service="unband" data-option="HARD" data-price="20000">
+                        <div class="option-name">HARD</div>
+                        <div class="option-price">Rp 20.000</div>
+                    </div>
+                    <div class="option-btn active" data-service="unband" data-option="PERMANEN BATU" data-price="30000">
+                        <div class="option-name">PERMANEN BATU</div>
+                        <div class="option-price">Rp 30.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Section -->
+        <div class="payment-section">
+            <div class="payment-header">
+                <div class="payment-title">PAYMENT GATEWAY</div>
+                <p style="color: var(--text-muted);">Select payment method and complete transaction</p>
+            </div>
+            
+            <!-- Selected Service Display -->
+            <div id="selectedService" style="
+                background: rgba(0, 255, 136, 0.1);
+                border: 2px solid var(--accent);
+                border-radius: 15px;
+                padding: 20px;
+                margin-bottom: 30px;
+                display: none;
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 1.1rem; color: var(--accent); font-weight: 600;" id="selectedServiceName">
+                            No service selected
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;" id="selectedOptionName">
+                            Select an option above
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent);" id="selectedPrice">
+                            Rp 0
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 0.8rem;">Total Amount</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <div class="method-card active" data-method="dana">
+                    <div class="method-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="method-name">DANA</div>
+                    <div class="method-desc">Instant Payment • No Fee</div>
+                </div>
+                
+                <div class="method-card" data-method="qris">
+                    <div class="method-icon"><i class="fas fa-qrcode"></i></div>
+                    <div class="method-name">QRIS</div>
+                    <div class="method-desc">Scan QR Code • All Banks</div>
+                </div>
+            </div>
+            
+            <!-- Dana Payment Info -->
+            <div id="danaPayment" class="dana-info">
+                <div style="font-size: 1.2rem; color: #0080ff;">
+                    <i class="fas fa-mobile-alt"></i> Dana Payment Number
+                </div>
+                <div class="dana-number glow">088229286129</div>
+                <div style="color: var(--text-muted);">
+                    Send exact amount to this number via DANA app
+                </div>
+                <div style="margin-top: 15px; font-size: 0.9rem; color: var(--warning);">
+                    <i class="fas fa-exclamation-circle"></i> Include service name in payment note
+                </div>
+            </div>
+            
+            <!-- QRIS Payment -->
+            <div id="qrisPayment" class="qr-container" style="display: none;">
+                <div style="font-size: 1.2rem; color: var(--accent); margin-bottom: 20px;">
+                    <i class="fas fa-qrcode"></i> Scan QR Code to Pay
+                </div>
+                <div class="qr-code">
+                    <!-- QR Code Image -->
+                    <img src="https://files.catbox.moe/sol15q.jpg" alt="QRIS Payment" 
+                         onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DANA:088229286129'">
+                </div>
+                <div style="margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                    Scan with any banking/e-wallet app supporting QRIS
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="payButton">
+                    <i class="fas fa-bolt"></i> BAYAR VIA DANA
+                </button>
+                
+                <a href="https://wa.me/6288220455270?text=cek%20min" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-whatsapp"></i> HUBUNGI OWNER
+                </a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Contact owner after payment with message "cek min"
+            </div>
+        </div>
+        
+        <!-- Status Panel -->
+        <div class="status-panel">
+            <div class="status-title">
+                <i class="fas fa-terminal"></i>
+                TRANSACTION LOG
+            </div>
+            <div id="statusLog">
+                <div class="log-entry">
+                    <span class="log-time">[SYSTEM]</span>
+                    <span class="log-message"> Payment gateway initialized</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">[INFO]</span>
+                    <span class="log-message"> Select service and payment method</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 NEXUS PAYMENT GATEWAY • Premium Digital Services</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">
+                <i class="fas fa-shield-alt"></i> Secure Transaction • 
+                <i class="fas fa-bolt"></i> Instant Delivery • 
+                <i class="fas fa-headset"></i> 24/7 Support
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Matrix Background Effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        const chars = "01";
+        const charArray = chars.split("");
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        
+        for(let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(10, 10, 10, 0.04)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "#00ff88";
+            ctx.font = `${fontSize}px monospace`;
+            
+            for(let i = 0; i < drops.length; i++) {
+                const char = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Global variables
+        let selectedService = null;
+        let selectedOption = null;
+        let selectedPrice = 0;
+        let selectedMethod = 'dana';
+        
+        // Service option selection
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active from all options in same service
+                const service = this.dataset.service;
+                document.querySelectorAll(`[data-service="${service}"]`).forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Add active to clicked button
+                this.classList.add('active');
+                
+                // Update selection
+                selectedService = service;
+                selectedOption = this.dataset.option;
+                selectedPrice = parseInt(this.dataset.price);
+                
+                // Update display
+                updateSelectedDisplay();
+                
+                // Log
+                addLog(`[SERVICE] Selected: ${service.toUpperCase()} - ${selectedOption} (Rp ${selectedPrice.toLocaleString()})`);
+            });
+        });
+        
+        // Payment method selection
+        document.querySelectorAll('.method-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active from all methods
+                document.querySelectorAll('.method-card').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Add active to clicked
+                this.classList.add('active');
+                selectedMethod = this.dataset.method;
+                
+                // Show/hide payment methods
+                document.getElementById('danaPayment').style.display = selectedMethod === 'dana' ? 'block' : 'none';
+                document.getElementById('qrisPayment').style.display = selectedMethod === 'qris' ? 'block' : 'none';
+                
+                // Update pay button
+                document.getElementById('payButton').innerHTML = 
+                    selectedMethod === 'dana' 
+                    ? '<i class="fas fa-bolt"></i> BAYAR VIA DANA'
+                    : '<i class="fas fa-qrcode"></i> SCAN QR CODE';
+                
+                addLog(`[PAYMENT] Method selected: ${selectedMethod.toUpperCase()}`);
+            });
+        });
+        
+        // Update selected service display
+        function updateSelectedDisplay() {
+            const display = document.getElementById('selectedService');
+            const serviceName = document.getElementById('selectedServiceName');
+            const optionName = document.getElementById('selectedOptionName');
+            const price = document.getElementById('selectedPrice');
+            
+            if (selectedService && selectedOption) {
+                display.style.display = 'block';
+                
+                // Format service names
+                const serviceTitles = {
+                    'panel': 'PANEL DATA',
+                    'band': 'JASA BAND',
+                    'bug': 'JASA BUG WA',
+                    'unband': 'JASA UNBAND WA'
+                };
+                
+                serviceName.textContent = serviceTitles[selectedService] || selectedService.toUpperCase();
+                optionName.textContent = selectedOption;
+                price.textContent = `Rp ${selectedPrice.toLocaleString()}`;
+            } else {
+                display.style.display = 'none';
+            }
+        }
+        
+        // Pay button functionality
+        document.getElementById('payButton').addEventListener('click', function() {
+            if (!selectedService || !selectedOption) {
+                alert('⚠️ Pilih layanan terlebih dahulu!');
+                addLog('[ERROR] No service selected', 'error');
+                return;
+            }
+            
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            // Show loading
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESSING...';
+            btn.disabled = true;
+            
+            addLog(`[PAYMENT] Initiating ${selectedMethod.toUpperCase()} payment...`);
+            
+            setTimeout(() => {
+                if (selectedMethod === 'dana') {
+                    // Open Dana app with payment intent
+                    openDanaPayment();
+                } else {
+                    // For QRIS, just show the QR (already visible)
+                    addLog('[QRIS] QR Code displayed for scanning');
+                }
+                
+                // Reset button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                
+                // Show confirmation
+                showPaymentConfirmation();
+                
+            }, 1500);
+        });
+        
+        // Open Dana app function
+        function openDanaPayment() {
+            // Dana deep link format
+            const danaNumber = '088229286129';
+            const amount = selectedPrice;
+            const note = `${selectedService.toUpperCase()}_${selectedOption}`;
+            
+            // Dana URL Scheme (approximate - actual may vary)
+            const danaUrl = `dana://payment?phoneNumber=${danaNumber}&amount=${amount}&note=${encodeURIComponent(note)}`;
+            
+            // Try to open Dana app
+            window.location.href = danaUrl;
+            
+            // Fallback: Open Dana in browser
+            setTimeout(() => {
+                const fallbackUrl = `https://api.whatsapp.com/send?phone=${danaNumber}&text=${encodeURIComponent(
+                    `Payment for ${selectedService.toUpperCase()} ${selectedOption} - Rp ${amount}`
+                )}`;
+                
+                // If Dana app not installed, open WhatsApp as fallback
+                addLog('[DANA] Opening payment gateway...');
+                
+                // Show instructions
+                const instructions = `
+PAYMENT INSTRUCTIONS:
+1. Open DANA app
+2. Send to: ${danaNumber}
+3. Amount: Rp ${amount.toLocaleString()}
+4. Note: ${selectedService.toUpperCase()} ${selectedOption}
+5. Click "Send Payment"
+                `;
+                
+                alert(instructions);
+                
+            }, 1000);
+            
+            addLog(`[DANA] Payment request: Rp ${amount} to ${danaNumber}`);
+        }
+        
+        // Show payment confirmation
+        function showPaymentConfirmation() {
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(10, 10, 10, 0.95);
+                border: 2px solid var(--accent);
+                border-radius: 20px;
+                padding: 40px;
+                z-index: 1000;
+                max-width: 500px;
+                width: 90%;
+                box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
+                text-align: center;
+            `;
+            
+            confirmation.innerHTML = `
+                <div style="font-size: 2rem; color: var(--accent); margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="color: var(--accent); margin-bottom: 15px;">PAYMENT INSTRUCTIONS</h3>
+                <div style="text-align: left; margin: 20px 0; line-height: 1.6;">
+                    <p><strong>Service:</strong> ${selectedService.toUpperCase()} ${selectedOption}</p>
+                    <p><strong>Amount:</strong> Rp ${selectedPrice.toLocaleString()}</p>
+                    <p><strong>DANA Number:</strong> 088229286129</p>
+                    <p><strong>Payment Note:</strong> ${selectedService.toUpperCase()}_${selectedOption}</p>
+                </div>
+                <div style="background: rgba(0, 255, 136, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                    <p style="color: var(--accent); margin: 0;">
+                        <i class="fas fa-info-circle"></i> 
+                        After payment, contact owner on WhatsApp with message "cek min"
+                    </p>
+                </div>
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="
+                        flex: 1;
+                        padding: 15px;
+                        background: rgba(255,255,255,0.1);
+                        border: 1px solid rgba(255,255,255,0.2);
+                        color: white;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    ">
+                        CLOSE
+                    </button>
+                    <a href="https://wa.me/6288220455270?text=cek%20min" target="_blank" style="
+                        flex: 1;
+                        padding: 15px;
+                        background: linear-gradient(45deg, var(--accent), #00ccaa);
+                        color: black;
+                        text-decoration: none;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        text-align: center;
+                    ">
+                        <i class="fab fa-whatsapp"></i> CONTACT OWNER
+                    </a>
+                </div>
+            `;
+            
+            document.body.appendChild(confirmation);
+            
+            // Auto-close after 30 seconds
+            setTimeout(() => {
+                if (confirmation.parentElement) {
+                    confirmation.remove();
+                }
+            }, 30000);
+            
+            addLog('[CONFIRMATION] Payment instructions displayed');
+        }
+        
+        // Add log entry
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('statusLog');
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            
+            let color = '#00ff88'; // default success
+            if (type === 'error') color = '#ff3366';
+            if (type === 'warning') color = '#ffaa00';
+            if (type === 'info') color = '#00a8ff';
+            
+            entry.innerHTML = `
+                <span class="log-time" style="color: ${color};">[${timestamp}]</span>
+                <span class="log-message"> ${message}</span>
+            `;
+            
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+            
+            // Keep only last 10 entries
+            if (log.children.length > 10) {
+                log.removeChild(log.firstChild);
+            }
+        }
+        
+        // Initialize with default selection
+        document.querySelector('.option-btn.active').click();
+        addLog('[SYSTEM] Payment gateway ready');
+        
+        // Auto-open WhatsApp instructions on page load (after 3 seconds)
+        setTimeout(() => {
+            addLog('[INFO] Select service and complete payment');
+        }, 3000);
+    </script>
+</body>
+</html>
